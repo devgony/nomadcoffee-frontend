@@ -9,13 +9,15 @@ import {
 const TOKEN = "token";
 const DARK_MODE = "DARK_MODE";
 
-export const isLoggedInVar = makeVar(false);
+export const isLoggedInVar = makeVar(Boolean(localStorage.getItem(TOKEN)));
 export const darkModeVar = makeVar(Boolean(localStorage.getItem(DARK_MODE)));
 
-export const logUserIn = () => {
+export const logUserIn = (token: string) => {
+  localStorage.setItem(TOKEN, token);
   isLoggedInVar(true);
 };
 export const logUserOut = () => {
+  localStorage.removeItem(TOKEN);
   isLoggedInVar(false);
 };
 

@@ -2,7 +2,7 @@ import { createGlobalStyle, DefaultTheme } from "styled-components";
 import reset from "styled-reset";
 
 export const lightTheme: DefaultTheme = {
-  accent: "#0095f6",
+  accent: "orange",
   bgColor: "#FAFAFA",
   fontColor: "rgb(38,38,38)",
   borderColor: "rgb(219, 219, 219)",
@@ -10,6 +10,7 @@ export const lightTheme: DefaultTheme = {
 export const darkTheme: DefaultTheme = {
   fontColor: "white",
   bgColor: "#000",
+  accent: "orange",
 };
 
 export const GlobalStyles = createGlobalStyle`
