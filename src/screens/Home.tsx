@@ -1,64 +1,88 @@
+import { useQuery } from "@apollo/client";
+import gql from "graphql-tag";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { logUserOut } from "../apollo";
+import CoffeeShop from "../components/CoffeeShop";
+import {
+  seeCoffeeShops,
+  seeCoffeeShopsVariables,
+} from "../__generated__/seeCoffeeShops";
 
-const NavBar = styled.div`
-  height: 7vh;
-  display: flex;
-  justify-content: space-around;
-`;
-const Logo = styled.div`
-  background-color: orange;
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const SEE_COFFEE_SHOPS = gql`
+  query seeCoffeeShops($page: Int!) {
+    seeCoffeeShops(page: $page) {
+      coffeeShops {
+        id
+        isMine
+        name
+        latitude
+        longitude
+        categories {
+          name
+        }
+        user {
+          name
+        }
+        photos {
+          url
+        }
+      }
+      maxPage
+    }
+  }
 `;
 
-const Menu = styled.div`
-  background-color: gray;
-  flex: 1;
-  border-left: 1px solid;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ContentLayout = styled.div`
+const PhotoContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   background-color: lightskyblue;
-  height: 93vh;
+  height: 80vh;
   margin: 0 auto;
   padding: 1vh;
-  max-width: 1000px;
+  /* max-width: 1000px; */
 `;
 
-const Content = styled.div`
-  background-color: red;
-  height: 10vh;
-  /* flex-direction: row; */
+const SPageIndicator = styled.span`
+  display: block;
+  margin: 1vh auto;
+  font-size: 20px;
+  text-align: center;
+`;
+
+const SIcon = styled.i`
+  cursor: pointer;
 `;
 
 function Home() {
+  const [page, setPage] = useState(1);
+  const nextPage = (max?: number) => {
+    setPage(prev => (max && prev < max ? prev + 1 : prev));
+  };
+  const prevPage = () => {
+    setPage(prev => (prev > 1 ? prev - 1 : prev));
+  };
+  const { loading, data, error } = useQuery<
+    seeCoffeeShops,
+    seeCoffeeShopsVariables
+  >(SEE_COFFEE_SHOPS, {
+    variables: { page },
+    fetchPolicy: "no-cache",
+  });
   return (
     <>
-      <NavBar>
-        <Logo>NomadCoffee(Home)</Logo>
-        <Menu>Admin my Caffe</Menu>
-        <Menu>Search around</Menu>
-        <Menu>Message</Menu>
-        <Menu>Support</Menu>
-        <Menu>
-          <button
-            onClick={() => {
-              logUserOut();
-            }}
-          >
-            Logout
-          </button>
-        </Menu>
-      </NavBar>
-      <ContentLayout>
-        <Content>Caffe Conent1</Content>
-      </ContentLayout>
+      <PhotoContainer>
+        {data?.seeCoffeeShops?.coffeeShops?.map(
+          coffeeShop =>
+            coffeeShop && <CoffeeShop key={coffeeShop.id} {...coffeeShop} />
+        )}
+      </PhotoContainer>
+      <SPageIndicator>
+        <SIcon onClick={prevPage}>←</SIcon> page {page} /{" "}
+        {data?.seeCoffeeShops?.maxPage}{" "}
+        <SIcon onClick={() => nextPage(data?.seeCoffeeShops?.maxPage)}>→</SIcon>
+      </SPageIndicator>
     </>
   );
 }

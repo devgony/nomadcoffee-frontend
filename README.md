@@ -17,5 +17,16 @@
 
 ```
 ✅ Your task is to implement sign up and login!
-🎁 basic layout for admin Home
+🎁 Basic layout for admin Home
+```
+
+# Day17-Add Shop(2d)
+
+## Make a CRUD of Coffee Shops.
+
+```
+✅ /: show the user all the coffee shops that they have created.
+✅ /add: show the user a form to create a shop.
+✅ /shop/:id: show the user a form to edit a shop, or a button to delete the shop.
+🎁 Add Apollo client graphQLErrors handler
 ```
