@@ -32,14 +32,12 @@ export const disableDarkMode = () => {
   localStorage.removeItem(DARK_MODE);
   darkModeVar(false);
 };
-// const httpLink = createHttpLink({
-//   uri: process.env.REACT_APP_GQL_DEV,
-//   // uri: "http://localhost:4000/graphql",
-// });
 
 const uploadHttpLink = createUploadLink({
-  uri: process.env.REACT_APP_GQL_DEV,
-  // uri: "http://localhost:4000/graphql",
+  uri:
+    process.env.NODE_ENV === "production"
+      ? "https://nomadcoffee-backend-henry.herokuapp.com/graphql"
+      : "http://localhost:4000/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {

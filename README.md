@@ -30,3 +30,9 @@
 ✅ /shop/:id: show the user a form to edit a shop, or a button to delete the shop.
 🎁 Add Apollo client graphQLErrors handler
 ```
+
+# Day19-Netlify(1d)
+
+```
+✅ Deploy your frontend to Netlify!
+```
