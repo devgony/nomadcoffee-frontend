@@ -9,10 +9,10 @@ import {
 } from "../__generated__/seeCoffeeShops";
 
 const Container = styled(Link)`
-  background-color: green;
+  /* background-color: green; */
   height: 250px;
   width: 250px;
-  margin: 5%;
+  /* margin: 5%; */
   display: flex;
   flex-direction: column;
   justify-content: space-around;

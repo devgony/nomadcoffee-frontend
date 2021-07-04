@@ -7,6 +7,7 @@ import Button from "../components/auth/Button";
 import Input from "../components/auth/Input";
 import CoffeeShopForm from "../components/CoffeeShopForm";
 import { Title } from "../components/shared";
+import { COFFEE_SHOP_FRAGMENT } from "../fragments";
 import {
   createCoffeeShop,
   createCoffeeShopVariables,
@@ -27,10 +28,10 @@ const CREATE_COFFEE_SHOP = gql`
       photos: $photos
       categories: $categories
     ) {
-      ok
-      error
+      ...CoffeeShopFragment
     }
   }
+  ${COFFEE_SHOP_FRAGMENT}
 `;
 
 const Container = styled.div`
@@ -47,7 +48,7 @@ export default function Add() {
     mode: "onChange",
   });
   const onCompleted = (data: createCoffeeShop) => {
-    if (data.createCoffeeShop.ok) {
+    if (data.createCoffeeShop?.id) {
       history.push("/");
     }
   };

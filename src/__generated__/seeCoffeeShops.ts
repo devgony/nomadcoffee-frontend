@@ -19,7 +19,7 @@ export interface seeCoffeeShops_seeCoffeeShops_coffeeShops_user {
 
 export interface seeCoffeeShops_seeCoffeeShops_coffeeShops_photos {
   __typename: "CoffeeShopPhoto";
-  url: string | null;
+  url: string;
 }
 
 export interface seeCoffeeShops_seeCoffeeShops_coffeeShops {
@@ -31,7 +31,7 @@ export interface seeCoffeeShops_seeCoffeeShops_coffeeShops {
   longitude: string;
   categories: (seeCoffeeShops_seeCoffeeShops_coffeeShops_categories | null)[] | null;
   user: seeCoffeeShops_seeCoffeeShops_coffeeShops_user;
-  photos: (seeCoffeeShops_seeCoffeeShops_coffeeShops_photos | null)[] | null;
+  photos: seeCoffeeShops_seeCoffeeShops_coffeeShops_photos[];
 }
 
 export interface seeCoffeeShops_seeCoffeeShops {

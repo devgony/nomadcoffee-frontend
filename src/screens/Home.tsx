@@ -37,11 +37,11 @@ const SEE_COFFEE_SHOPS = gql`
 const PhotoContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  background-color: lightskyblue;
+  grid-gap: 2%;
+  /* background-color: lightskyblue; */
   height: 80vh;
   margin: 0 auto;
-  padding: 1vh;
-  /* max-width: 1000px; */
+  max-width: 1000px;
 `;
 
 const SPageIndicator = styled.span`
